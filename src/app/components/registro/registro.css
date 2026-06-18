@@ -1,18 +1,15 @@
 .login-page {
     min-height: 100vh;
-
-    background:
-        linear-gradient(
-            135deg,
-            #321a04,
-            #573616,
-            #573616
-        );
-
     display: flex;
 }
 
 .login-card {
+
+    position: relative;
+    z-index: 2;
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
 
     background: rgba(0, 0, 0, 0.342);
 
@@ -117,13 +114,15 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    filter: brightness()
 }
 
 .hero-title{
     margin: 0;
     font-size: 3rem;
     font-weight: 900;
-    color: #ffc83d
+    color: #ffc83d;
+    filter: brightness()
 }
 
 .hero-description{
