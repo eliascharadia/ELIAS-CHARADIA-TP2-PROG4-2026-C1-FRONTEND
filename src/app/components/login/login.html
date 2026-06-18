@@ -2,106 +2,108 @@
 
   <div class="container">
 
-    <div class="row align-items-center min-vh-100">
+    <div class="row justify-content-center min-vh-100 align-items-center">
 
-      <div class="col-lg-6">
+      <div class="col-12 col-lg-10">
+      
+        <div class="login-wrapper">
+          <div class="hero-content">
 
-        <div class="hero-content">
+            <i class="bi bi-piggy-bank-fill logo-icon"></i>
+            <h1 class="hero-title">
+              RockSocial
+            </h1>
 
-          <i class="bi bi-piggy-bank-fill logo-icon"></i>
-          <h1 class="hero-title">
-            RockSocial
-          </h1>
-
-          <p class="hero-description">
-            Conecta con tus amigos, comparte momentos y descubre nuevas historias.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="col-lg-6">
-        <div class="login-card">
-          <form [formGroup]="loginForm" (ngSubmit)="onSumbit()">
-
-            <div class="mb-3">
-
-              <label class="form-label">
-                Usuario o Email
-              </label>
-
-              <div class="input-group">
-
-                <span class="input-group-text">
-                  <i class="bi bi-person"></i>
-                </span>
-
-                <input type="text" formControlName="login" class="form-control custom-input"
-                  placeholder="Ingrese su usuario">
-              </div>
-              @if(loginForm.get('login')?.touched && loginForm.get('login')?.touched){
-
-              <div class="text-danger small mt-1">
-                 @if(loginForm.get('login')?.errors?.['required']){ Debe ingresar un su nombre de Usuario o Email. }
-                @if(loginForm.get('login')?.errors?.['invalidLogin']){ Ingrese un email válido o un usuario de al menos 4 caracteres.}
-              </div>
-
-              }
-
-            </div>
-
-            <div class="mb-4">
-
-              <label class="form-label">
-                Contraseña
-              </label>
-
-              <div class="input-group">
-
-                <span class="input-group-text">
-                  <i class="bi bi-lock"></i>
-                </span>
-
-                <input type="password" formControlName="password" class="form-control custom-input"
-                  placeholder="Ingrese su contraseña">
-              </div>
-              @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched){
-              <div class="text-danger small mt-1">
-                @if(loginForm.get('password')?.errors?.['required']){ La constraseña es obligatoria }
-                @if(loginForm.get('password')?.errors?.['minlength']){ El minimo de caracteres es 8 <br> }
-                @if(loginForm.get('password')?.errors?.['pattern']){ La contraseña debe tener al menos una mayúscula y un numero.}
-              </div>
-              }
-
-            </div>
-
-            <button type="submit" class="btn btn-primary login-btn w-100" [disabled]="loginForm.invalid">
-
-              Iniciar Sesión
-
-            </button>
-
-          </form>
-
-          <hr>
-
-          <div class="text-center">
-
-            <span class="text-light">
-              ¿No tienes cuenta?
-            </span>
-
-            <br>
-
-            <a routerLink="/registro" class="register-link">
-
-              Crear cuenta
-            </a>
+            <p class="hero-description">
+              Conecta con tus amigos, comparte momentos y descubre nuevas historias.
+            </p>
 
           </div>
 
+        
+
+
+        
+          <div class="login-card">
+            <form [formGroup]="loginForm" (ngSubmit)="onSumbit()">
+
+              <div class="mb-3">
+
+                <label class="form-label">
+                  Usuario o Email
+                </label>
+
+                <div class="input-group">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
+
+                  <input type="text" formControlName="login" class="form-control custom-input"
+                    placeholder="Ingrese su usuario">
+                </div>
+                @if(loginForm.get('login')?.touched && loginForm.get('login')?.touched){
+
+                <div class="text-danger small mt-1">
+                  @if(loginForm.get('login')?.errors?.['required']){ Debe ingresar un su nombre de Usuario o Email. }
+                  @if(loginForm.get('login')?.errors?.['invalidLogin']){ Ingrese un email válido o un usuario de al menos 4 caracteres.}
+                </div>
+
+                }
+
+              </div>
+
+              <div class="mb-4">
+
+                <label class="form-label">
+                  Contraseña
+                </label>
+
+                <div class="input-group">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-lock"></i>
+                  </span>
+
+                  <input type="password" formControlName="password" class="form-control custom-input"
+                    placeholder="Ingrese su contraseña">
+                </div>
+                @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched){
+                <div class="text-danger small mt-1">
+                  @if(loginForm.get('password')?.errors?.['required']){ La constraseña es obligatoria }
+                  @if(loginForm.get('password')?.errors?.['minlength']){ El minimo de caracteres es 8 <br> }
+                  @if(loginForm.get('password')?.errors?.['pattern']){ La contraseña debe tener al menos una mayúscula y un numero.}
+                </div>
+                }
+
+              </div>
+
+              <button type="submit" class="btn btn-primary mt-3 login-btn w-100" [disabled]="loginForm.invalid">
+
+                Iniciar Sesión
+
+              </button>
+
+            </form>
+
+            <hr class="mb-5 mt-5">
+
+            <div class="text-center">
+
+              <span class="text-light">
+                ¿No tienes cuenta?
+              </span>
+
+              <br>
+
+              <a routerLink="/registro" class="register-link">
+
+                Crear cuenta
+              </a>
+
+            </div>
+
+          </div>
         </div>
       </div>
 
