@@ -1,18 +1,16 @@
 .login-page {
     min-height: 100vh;
-
-    background:
-        linear-gradient(
-            135deg,
-            #321a04,
-            #573616,
-            #573616
-        );
-
     display: flex;
 }
 
 .login-card {
+
+
+    position: relative;
+    z-index: 2;
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
 
     background: rgba(0, 0, 0, 0.342);
 
@@ -33,7 +31,7 @@
 
 .form-label {
 
-    color: #ffc83d;
+    color: rgba(255, 200, 61, .90);
 
     font-weight: 500;
 }
@@ -118,18 +116,21 @@
 .hero-title{
     font-size: 5rem;
     font-weight: 900;
-    color: #ffc83d
+    color: rgb(252, 151, 0);
+    filter: brightness()
 }
 
 .hero-description{
     font-size: 1.8rem;
     max-width: 500px;
     color: #c3903e;
+    filter: brightness()
 }
 
 .logo-icon{
     font-size: 10rem;
     color: #c77d24;
+    filter: brightness();
     animation: glow 2s ease-in-out infinite;
 }
 
