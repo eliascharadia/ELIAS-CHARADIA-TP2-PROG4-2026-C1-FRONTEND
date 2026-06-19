@@ -1,0 +1,83 @@
+<div class="container posts-container mt-4">
+
+  <h3 class="mb-4">🎸 Publicaciones</h3>
+  <!-- FORM CREAR POST -->
+  <div class="card mb-4 shadow-lg post-form">
+
+    <div class="card-body">
+
+      
+      <input type="text"
+             class="form-control mb-2 custom-input"
+             placeholder="Título...">
+
+      <textarea class="form-control mb-2 custom-input"
+                rows="3"
+                placeholder="¿Qué estás pensando?"></textarea>
+
+      <input type="text"
+             class="form-control mb-2 custom-input"
+             placeholder="URL de imagen (opcional)">
+
+      <button class="btn btn-primary custom-btn w-100">
+        Publicar
+      </button>
+
+    </div>
+  </div>
+
+  <!-- FEED -->
+   @for(post of posts; track post.id){
+  <div class="card mb-3 post-card">
+
+    <div class="card-body">
+
+      <h5>{{ post.title }}</h5>
+
+      <p class="comentario-costum">{{ post.message }}</p>
+
+      <img
+           [src]="post.image"
+           class="post-image mb-3"
+           alt="imagen-post">
+
+      <!-- ACCIONES -->
+      <div class="d-flex justify-content-between align-items-center">
+
+        <button class="btn btn-outline-danger btn-sm"
+                (click)="like(post)">
+          ❤️ Me gusta ({{ post.likes }})
+        </button>
+
+        <span class="comentario-costum">
+          💬 {{ post.comments.length }} comentarios
+        </span>
+
+      </div>
+
+      <!-- COMENTARIOS -->
+      <hr>
+      @for(comment of post.comments; track comment.id){
+        <div class="comment-box">
+          💬 {{ comment.contenido }}
+        </div>
+      }
+
+      <!-- AGREGAR COMENTARIO -->
+      <div class="input-group mt-2">
+        <input type="text"
+               class="form-control custom-input"
+               placeholder="Escribe un comentario..."
+               #commentInput>
+
+        <button class="btn btn-dark custom-btn"
+                >
+          Enviar
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
+
+</div>

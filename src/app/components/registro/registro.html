@@ -1,0 +1,308 @@
+<div class="register-page">
+
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-12 col-lg-10">
+
+                <div class="hero-content">
+
+                    <i class="bi bi-piggy-bank-fill logo-icon"></i>
+                    <h1 class="hero-title">
+                        RibbieSocial
+                    </h1>
+                </div>
+
+                <div class="register-card">
+                    <form [formGroup]="registerForm" (ngSubmit)="onSumbit()">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+                                        Nombre
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-text">
+                                            <i class="bi bi-person"></i>
+                                        </span>
+
+                                        <input type="text" formControlName="name" class="form-control custom-input"
+                                            placeholder="Ingrese su nombre">
+                                    </div>
+                                    @if(registerForm.get('name')?.touched && registerForm.get('name')?.touched){
+
+                                    <div class="text-danger small mt-1">
+                                        @if(registerForm.get('name')?.errors?.['required']){ Este campo es obligatorio }
+                                    </div>
+
+                                    }
+
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+                                        Apellido
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-text">
+                                            <i class="bi bi-person"></i>
+                                        </span>
+
+                                        <input type="text" formControlName="lastName" class="form-control custom-input"
+                                            placeholder="Ingrese su apellido">
+                                    </div>
+                                    @if(registerForm.get('lastName')?.touched && registerForm.get('lastName')?.touched){
+
+                                    <div class="text-danger small mt-1">
+                                        @if(registerForm.get('lastName')?.errors?.['required']){ Este campo es obligatorio }
+                                    </div>
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+        
+                                    <label class="form-label">
+                                        Email
+                                    </label>
+        
+                                    <div class="input-group">
+        
+                                        <span class="input-group-text">
+                                            <i class="bi bi-envelope"></i>
+                                        </span>
+        
+                                        <input type="email" formControlName="email" class="form-control custom-input"
+                                            placeholder="Ingrese su Email">
+                                    </div>
+                                    @if(registerForm.get('email')?.touched && registerForm.get('email')?.touched){
+        
+                                    <div class="text-danger small mt-1">
+                                        @if(registerForm.get('email')?.errors?.['required']){ Este campo es obligatorio }
+                                        @if(registerForm.get('email')?.errors?.['pattern']){ Email no valido }
+                                    </div>
+        
+                                    }
+        
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+        
+                                    <label class="form-label">
+                                        Nombre de usuario
+                                    </label>
+        
+                                    <div class="input-group">
+        
+                                        <span class="input-group-text">
+                                            <i class="bi bi-person"></i>
+                                        </span>
+        
+                                        <input type="text" formControlName="userName" class="form-control custom-input"
+                                            placeholder="Ingrese su usuario">
+                                    </div>
+                                    @if(registerForm.get('userName')?.touched && registerForm.get('userName')?.touched){
+        
+                                    <div class="text-danger small mt-1">
+                                        @if(registerForm.get('userName')?.errors?.['required']){ Este campo es obligatorio }
+                                    </div>
+        
+                                    }
+        
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+
+                                    <label class="form-label">
+                                        Contraseña
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-text">
+                                            <i class="bi bi-lock"></i>
+                                        </span>
+
+                                        <input type="password" formControlName="password" class="form-control custom-input"
+                                            placeholder="Ingrese su contraseña">
+                                    </div>
+                                    @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched){
+                                    <div class="text-danger small mt-1">
+                                        @if(registerForm.get('password')?.errors?.['required']){ La constraseña es obligatoria }
+                                        @if(registerForm.get('password')?.errors?.['minlength']){ El minimo de caracteres es 8
+                                        <br> }
+                                        @if(registerForm.get('password')?.errors?.['pattern']){ La contraseña debe tener al
+                                        menos una mayúscula y un numero.}
+                                    </div>
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-4">
+
+                                    <label class="form-label">
+                                        Confirmar contraseña
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-text">
+                                            <i class="bi bi-lock"></i>
+                                        </span>
+
+                                        <input type="password" formControlName="confirmPassword"
+                                            class="form-control custom-input" placeholder="Confime su contraseña">
+                                    </div>
+                                    @if (registerForm.get('confirmPassword')?.invalid &&
+                                    registerForm.get('confirmPassword')?.touched){
+                                    <div class="text-danger small mt-1">
+                                        @if(registerForm.get('confirmPassword')?.errors?.['required']){ La constraseña es obligatoria }
+                                    </div>
+                                    }
+                                    @if(registerForm.errors?.['coinciden']){
+                                        <div class="text-danger small mt-1">La constraseñas no coinciden</div>}
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Fecha de nacimiento
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-cake"></i>
+                                </span>
+
+                                <input type="date" formControlName="fechaNacimiento"
+                                    class="form-control custom-input">
+                            </div>
+                            @if (registerForm.get('fechaNacimiento')?.invalid &&
+                            registerForm.get('fechaNacimiento')?.touched){
+                            <div class="text-danger small mt-1">
+                                @if(registerForm.get('fechaNacimiento')?.errors?.['required']){ Debe ingresar su fecha de nacimiento.}
+                                @if(registerForm.get('fechaNacimiento')?.errors?.['menorEdad']){Debe ser mayor de 13 años.}
+                                @if(registerForm.get('fechaNacimiento')?.errors?.['fechaFutura']){Ingreso una edad no valida. (todavia no nació)}
+                                @if(registerForm.get('fechaNacimiento')?.errors?.['superaEdadMaxima']){Debe ingresar una edad por debajo de los 100 años.}
+                            </div>
+                            }
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Descripción breve
+                            </label>
+                            
+                            
+                            <div class="input-group">
+                                
+                                <span class="input-group-text">
+                                    <i class="bi bi-card-text"></i>
+                                </span>
+                                
+                                <textarea rows="4" class="form-control custom-input" formControlName="descripcion"
+                                    placeholder="Contanos algo sobre vos...">
+                                </textarea>        
+                            </div>
+                            <div class="text-end text-secondary small">
+                                {{ registerForm.controls.descripcion.value?.length || 0 }}/200
+                            </div>
+                            @if (registerForm.get('descripcion')?.invalid &&
+                            registerForm.get('descripcion')?.touched){
+                            <div class="text-danger small mt-1">
+                                @if(registerForm.get('descripcion')?.errors?.['required']){ Este campo es obligatorio.}
+                                @if(registerForm.get('descripcion')?.errors?.['minlength']){La descripción debe tener al menos 10 caracteres.}
+                                @if(registerForm.get('descripcion')?.errors?.['maxlength']){La descripción no puede superar los 200 caracteres.}
+                            </div>
+                            }
+
+                        <div class="mb-4">
+                        
+                            <label class="form-label">
+                                Foto de perfil
+                            </label>
+                            <div class="input-group">
+                                <input type="file" class="form-control custom-file-input" accept="image/*" (change)="onArchivoSeleccionado($event)">
+                            </div>
+
+                            @if (registerForm.get('imagenPerfil')?.invalid &&
+                            registerForm.get('imagenPerfil')?.touched){
+                                @if(registerForm.get('imagenPerfil')?.errors?.['invalidFileType']){ Debe subir una imagen de perfil valida.}
+                            }
+                            @if(imagenPrevista()){
+                            
+                            <div class="text-center mt-3">
+                            
+                                <img [src]="imagenPrevista()" alt="Vista previa" class="profile-preview">
+                            
+                            </div>
+                            
+                            }
+                        
+                        </div>
+                        
+                        </div>
+
+                        <button type="submit" class="btn btn-primary register-btn w-100" [disabled]="registerForm.invalid">
+
+                            Resgistrarse
+
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <div class="text-center">
+
+                        <span class="text-light">
+                            ¿Ya tienes cuenta?
+                        </span>
+
+                        <br>
+
+                        <a routerLink="/" class="register-link">
+
+                            Iniciar Sesion
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
