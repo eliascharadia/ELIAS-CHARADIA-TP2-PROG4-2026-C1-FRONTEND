@@ -12,7 +12,7 @@
     overflow: hidden;
     border: none;
 
-    background: rgba(0, 0, 0, 0.342);
+    background: rgba(26, 26, 26, 0.788);
 
     backdrop-filter: blur(20px);
 
@@ -95,6 +95,12 @@
         0 10px 25px rgba(255,200,61,.4);
 }
 
+.register-btn:active{
+  background-color: #945d1b;
+  transform: scale(0.98);
+  border-color: rgba(255,200,61,.4);
+}
+
 .register-link {
 
     color: #ffc83d;
@@ -122,7 +128,7 @@
     margin: 0;
     font-size: 3rem;
     font-weight: 900;
-    color: #ffc83d;
+    color: #996c24;
     filter: brightness()
 }
 
@@ -134,7 +140,7 @@
 
 .logo-icon{
     font-size: 3rem;
-    color: #c77d24;
+    color: rgb(117, 70, 0);;
     animation: glow 2s ease-in-out infinite;
 }
 

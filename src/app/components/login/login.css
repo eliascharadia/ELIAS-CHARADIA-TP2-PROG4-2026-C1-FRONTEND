@@ -21,7 +21,7 @@
 
     flex: 1;
 
-    background: rgba(0, 0, 0, 0.342);
+    background: rgba(26, 26, 26, 0.788);
 
     backdrop-filter: blur(20px);
 
@@ -104,6 +104,12 @@
         0 10px 25px rgba(255,200,61,.4);
 }
 
+.login-btn:active{
+  background-color: #945d1b;
+  transform: scale(0.98);
+  border-color: rgba(255,200,61,.4);
+}
+
 .register-link {
 
     color: #ffc83d;
@@ -125,20 +131,20 @@
 .hero-title{
     font-size: 5rem;
     font-weight: 900;
-    color: rgb(252, 151, 0);
+    color: rgb(117, 70, 0);
     filter: brightness()
 }
 
 .hero-description{
     font-size: 1.8rem;
     max-width: 500px;
-    color: #c3903e;
+    color: #996c24;
     filter: brightness()
 }
 
 .logo-icon{
     font-size: 10rem;
-    color: #c77d24;
+    color: rgb(117, 70, 0);
     filter: brightness();
     animation: glow 2s ease-in-out infinite;
 }
@@ -146,17 +152,17 @@
 @keyframes glow {
 
     0% {
-        text-shadow: 0 0 5px #c3903e;
+        text-shadow: 0 0 5px #cc8f2d;
     }
 
     50% {
         text-shadow:
-            0 0 15px #c3903e,
-            0 0 30px #c3903e;
+            0 0 15px #cc8f2d,
+            0 0 30px #cc8f2d;
     }
 
     100% {
-        text-shadow: 0 0 5px #c3903e;
+        text-shadow: 0 0 5px #cc8f2d;
     }
 }
 
