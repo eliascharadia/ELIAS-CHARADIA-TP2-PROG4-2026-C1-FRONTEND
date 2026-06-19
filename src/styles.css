@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 body{
     font-family: 'Inter', sans-serif;
-    background: url("/vintage-grunge-background-12-1024x1024.jpg") no-repeat center center fixed;
+    background: url("/white-grunge-texture-primed-canvas_1194-5700.avif") no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -12,6 +12,6 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.199);
   z-index: 0;
 }
