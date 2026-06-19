@@ -1,9 +1,10 @@
-.login-page {
+.register-page {
     min-height: 100vh;
     display: flex;
 }
 
-.login-card {
+
+.register-card {
 
     position: relative;
     z-index: 2;
@@ -70,7 +71,7 @@
         0 0 0 .2rem rgba(255,200,61,.25);
 }
 
-.login-btn {
+.register-btn {
 
     height: 50px;
 
@@ -86,7 +87,7 @@
     border-color: #945d1b;
 }
 
-.login-btn:hover {
+.register-btn:hover {
 
     transform: translateY(-2px);
 
