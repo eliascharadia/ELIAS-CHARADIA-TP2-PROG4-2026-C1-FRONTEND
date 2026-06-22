@@ -76,7 +76,7 @@ export class Registro {
 
       if (!file.type.startsWith('image/')) {
 
-        this.registerForm.get('imgagenPerfil')?.setErrors({
+        this.registerForm.get('imagenPerfil')?.setErrors({
           invalidFileType: true
         });
 
