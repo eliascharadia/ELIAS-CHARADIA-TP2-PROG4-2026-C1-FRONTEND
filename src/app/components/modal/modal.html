@@ -1,0 +1,9 @@
+@if (modalService.estado().visible) {
+  <div class="modal-backdrop-custom" (click)="modalService.cerrar()">
+    <div class="modal-box" [class]="modalService.estado().tipo" (click)="$event.stopPropagation()">
+      <h5>{{ modalService.estado().titulo }}</h5>
+      <p>{{ modalService.estado().mensaje }}</p>
+      <button class="btn btn-primary w-100" (click)="modalService.cerrar()">Aceptar</button>
+    </div>
+  </div>
+}
