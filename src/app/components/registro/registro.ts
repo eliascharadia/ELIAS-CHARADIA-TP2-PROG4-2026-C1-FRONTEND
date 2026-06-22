@@ -1,8 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { passwordMatchValidator } from '../../validators/confirmPassword.Validator';
 import { minimaEdadValidador } from '../../validators/fechaNacimiento.Validator';
+import { ModalService } from '../../services/modal.service.ts';
+import { Autenticacion } from '../../services/autenticacion';
+
 
 @Component({
   selector: 'app-registro',
@@ -12,8 +15,13 @@ import { minimaEdadValidador } from '../../validators/fechaNacimiento.Validator'
 })
 export class Registro {
   private fb = inject(FormBuilder);
+  private authService = inject(Autenticacion);
+  private modalService = inject(ModalService);
+  private router = inject(Router);
+
   archivoSeleccionado: File | null = null;
   imagenPrevista = signal<string | null>(null);
+  cargando = signal(false);
 
   registerForm = this.fb.group({
     name: ['', [
@@ -62,7 +70,40 @@ export class Registro {
 );
 
   async onSumbit() { 
-    
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    this.cargando.set(true);
+    const valores = this.registerForm.value;
+
+     this.authService.registrar({ // paso los datos del form al servicio
+      name: valores.name!,
+      lastName: valores.lastName!,
+      email: valores.email!,
+      userName: valores.userName!,
+      password: valores.password!,
+      repetirPassword: valores.confirmPassword!,
+      fechaNacimiento: valores.fechaNacimiento!,
+      descripcion: valores.descripcion!,
+      imagenPerfil: this.archivoSeleccionado
+    }).subscribe({ // me subscribo
+      next: () => {
+        this.cargando.set(false);
+        this.modalService.mostrar(
+          'Tu cuenta fue creada con éxito. Ya podés iniciar sesión.',
+          'exito',
+          '¡Registro exitoso!'
+        );
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.cargando.set(false);
+        const mensaje = err.error?.message || 'Ocurrió un error al registrarte.';
+        this.modalService.mostrar(mensaje, 'error');
+      }
+    });
   }
 
   onArchivoSeleccionado(event: Event): void {
