@@ -3,7 +3,7 @@
   border-radius: 12px;
   padding: 1.25rem;
   margin-bottom: 1rem;
-  color: #fff;
+  color: #ffc83d;
 }
 
 .publicacion-header {
@@ -47,7 +47,7 @@
 }
 
 .publicacion-descripcion {
-  color: #ddd;
+  color: #ad965b;
   margin-bottom: 0.75rem;
 }
 

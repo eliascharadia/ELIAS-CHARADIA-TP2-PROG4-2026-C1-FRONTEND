@@ -39,11 +39,11 @@
       }
 
       <div class="paginacion">
-        <button class="btn btn-outline-light" [disabled]="paginaActual() === 0" (click)="paginaAnterior()">
+        <button class="btn btn-outline-light paginacion-btn" [disabled]="paginaActual() === 0" (click)="paginaAnterior()">
           Anterior
         </button>
         <span class="pagina-info">Página {{ paginaActual() + 1 }}</span>
-        <button class="btn btn-outline-light" [disabled]="publicaciones().length < limitePorPagina" (click)="paginaSiguiente()">
+        <button class="btn btn-outline-light paginacion-btn" [disabled]="publicaciones().length < limitePorPagina" (click)="paginaSiguiente()">
           Siguiente
         </button>
       </div>

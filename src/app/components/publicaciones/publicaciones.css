@@ -21,21 +21,21 @@
 }
 
 .label-orden {
-  color: #aaa;
+  color: #2e2d2d;
 }
 
 .btn-orden {
-  background: none;
-  border: 1px solid #555;
+  background-color: #1e1e1e;
+  border: 1px solid #746f6f;
   border-radius: 20px;
   padding: 0.4rem 1rem;
-  color: #fff;
+  color: #ffe8adbe;
   cursor: pointer;
 }
 
 .btn-orden.activo {
-  background: #6c5ce7;
-  border-color: #6c5ce7;
+  background: #814311;
+  border-color: #582c18;
 }
 
 .paginacion {
@@ -46,6 +46,18 @@
   margin-top: 1.5rem;
 }
 
+.paginacion-btn{
+  background-color: #c3903e;
+  border-color: #dfad70;
+  color: #ffe8adbe;
+}
+
+.paginacion-btn:active{
+  background-color: #945d1b;
+  transform: scale(0.98);
+  border-color: rgba(255,200,61,.4);
+}
+
 .pagina-info {
-  color: #aaa;
+  color: #ff520d;
 }
