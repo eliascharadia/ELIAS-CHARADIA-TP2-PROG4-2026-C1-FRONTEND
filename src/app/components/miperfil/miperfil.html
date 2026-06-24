@@ -1,58 +1,72 @@
 <div class="container profile-container mt-4">
 
-    <div class="card profile-card shadow-lg">
+  <div class="card profile-card shadow-lg">
 
-        <!-- Header del perfil -->
-        <div class="profile-header text-center p-4">
+    <!-- Header del perfil -->
+    <div class="profile-header text-center p-4">
 
-            <img [src]="user()?.avatar" class="profile-avatar mb-3" alt="avatar">
+      @if (usuario()?.fotoPerfilUrl) {
+        <img [src]="usuario()?.fotoPerfilUrl" class="profile-avatar mb-3" alt="avatar">
+      } @else {
+        <div class="profile-avatar-inicial mb-3">{{ inicialUsuario }}</div>
+      }
 
-            <h3 class="mb-0">Elías Charadía</h3>
-        </div>
-
-        
-        <!-- Info -->
-        <div class="card-body">
-            <hr>
-
-            <h5 class="mb-3">Sobre mí</h5>
-            <p>
-                Amante del rock, guitarrista autodidacta y fan de las bandas clásicas.
-                Buscando conectar con músicos y compartir publicaciones.
-            </p>
-
-            <hr>
-
-            <!-- Stats -->
-            <div class="row text-center">
-
-                <div class="col">
-                    <h6>Publicaciones</h6>
-                    <strong>12</strong>
-                </div>
-
-                <div class="col">
-                    <h6>Seguidores</h6>
-                    <strong>240</strong>
-                </div>
-
-                <div class="col">
-                    <h6>Siguiendo</h6>
-                    <strong>180</strong>
-                </div>
-
-            </div>
-
-            <hr>
-
-            <!-- Botón -->
-            <div class="text-center">
-                <button class="btn btn-dark px-4">
-                    Editar perfil
-                </button>
-            </div>
-
-        </div>
+      <h3 class="mb-0">{{ usuario()?.nombre }} {{ usuario()?.apellido }}</h3>
+      <p class="text-secondary mb-0">&#64;{{ usuario()?.nombreUsuario }}</p>
     </div>
+
+    <!-- Info -->
+    <div class="card-body">
+      <hr>
+
+      <h5 class="mb-3">Sobre mí</h5>
+      <p>{{ usuario()?.descripcion || 'Sin descripción.' }}</p>
+
+      <hr>
+
+      <div class="row text-center">
+        <div class="col">
+          <h6>Correo</h6>
+          <strong>{{ usuario()?.correo }}</strong>
+        </div>
+        <div class="col">
+          <h6>Perfil</h6>
+          <strong>{{ usuario()?.perfil }}</strong>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="text-center">
+        <button class="btn btn-dark px-4">
+          Editar perfil
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Últimas publicaciones -->
+  <div class="mis-publicaciones mt-4">
+    <h5 class="mb-3">Mis últimas publicaciones</h5>
+
+    @if (cargandoPublicaciones()) {
+      <div class="text-center">
+        <div class="spinner-border text-light" role="status"></div>
+      </div>
+    } @else if (misPublicaciones().length === 0) {
+      <p class="text-secondary">Todavía no hiciste ninguna publicación.</p>
+    } @else {
+      @for (pub of misPublicaciones(); track pub._id) {
+        <app-publicacion
+          [publicacion]="pub"
+          [usuarioActualId]="usuario()?._id ?? null"
+          (darLike)="onDarLike($event)"
+          (quitarLike)="onQuitarLike($event)"
+          (eliminar)="onEliminar($event)"
+        />
+      }
+    }
+  </div>
 
 </div>
