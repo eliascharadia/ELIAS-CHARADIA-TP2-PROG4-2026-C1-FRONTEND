@@ -1,0 +1,101 @@
+.publicacion-card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  color: #ffc83d;
+}
+
+.publicacion-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.autor-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.autor-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.autor-nombre {
+  font-weight: 600;
+}
+
+.autor-usuario {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.btn-eliminar {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+}
+
+.publicacion-titulo {
+  margin-bottom: 0.5rem;
+}
+
+.publicacion-descripcion {
+  color: #ad965b;
+  margin-bottom: 0.75rem;
+}
+
+.publicacion-imagen {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.publicacion-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-like {
+  background: none;
+  border: 1px solid #555;
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-like.activo {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.publicacion-fecha {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+
+.autor-avatar-inicial {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #6c5ce7;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
