@@ -4,12 +4,13 @@ import { PublicacionesService } from '../../services/publicaciones';
 import { ModalService } from '../../services/modal.service.ts';
 import { Publicacion } from '../../components/publicacion/publicacion';
 import { Publicacion as PublicacionModel } from '../../models/publicaciones';
+import { NuevaPublicacion } from '../nueva-publicacion/nueva-publicacion';
 
 type PublicacionConLike = PublicacionModel & { yaLeDiLike: boolean };
 
 @Component({
     selector: 'app-publicaciones',
-    imports: [CommonModule, Publicacion],
+    imports: [CommonModule, Publicacion, NuevaPublicacion],
     templateUrl: './publicaciones.html',
     styleUrl: './publicaciones.css',
 })
@@ -20,6 +21,7 @@ export class Publicaciones implements OnInit {
 
     publicaciones = signal<PublicacionConLike[]>([]);
     cargando = signal(false);
+    mostrarModalNuevaPublicacion = signal(false);
     orden = signal<'fecha' | 'likes'>('fecha');
     paginaActual = signal(0);
     limitePorPagina = 3;
@@ -129,6 +131,22 @@ export class Publicaciones implements OnInit {
     // reactivar el botón. Lo resolvemos recargando el listado actual.
     private restaurarBotonLike(publicacionId: string): void {
         this.cargarPublicaciones();
+    }
+
+    
+
+    abrirModalNuevaPublicacion(): void {
+        this.mostrarModalNuevaPublicacion.set(true);
+    }
+
+    cerrarModalNuevaPublicacion(): void {
+        this.mostrarModalNuevaPublicacion.set(false);
+    }
+
+    onPublicacionCreada(): void {
+        this.paginaActual.set(0);
+        this.orden.set('fecha');
+        this.cargarPublicaciones(); // recargamos para ver la nueva publicación arriba de todo
     }
 
 }

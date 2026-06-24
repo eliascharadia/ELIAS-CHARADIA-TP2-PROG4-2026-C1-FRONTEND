@@ -61,3 +61,36 @@
 .pagina-info {
   color: #ff520d;
 }
+
+.acciones-superiores {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.btn-nueva-publicacion {
+  height: 50px;
+  padding: 0 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all .3s;
+  background-color: #c3903e;
+  border-color: #945d1b;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-nueva-publicacion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255,200,61,.4);
+  color: #fff;
+}
+
+.btn-nueva-publicacion:active {
+  background-color: #945d1b;
+  transform: scale(0.98);
+  border-color: rgba(255,200,61,.4);
+}
