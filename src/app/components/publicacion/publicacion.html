@@ -1,0 +1,42 @@
+<div class="publicacion-card">
+
+  <div class="publicacion-header">
+    @if (publicacion.autor.fotoPerfilUrl) {
+      <img [src]="publicacion.autor.fotoPerfilUrl" alt="Foto de perfil" class="autor-avatar">
+    } @else {
+      <div class="autor-avatar-inicial">{{ inicialAutor }}</div>
+    }
+    <div class="autor-info">
+      <span class="autor-nombre">{{ publicacion.autor.nombre }} {{ publicacion.autor.apellido }}</span>
+      <span class="autor-usuario">&#64;{{ publicacion.autor.nombreUsuario }}</span>
+    </div>
+
+    @if (esMiPublicacion) {
+      <button class="btn-eliminar" (click)="onClickEliminar()" title="Eliminar publicación">
+        <i class="bi bi-trash"></i>
+      </button>
+    }
+  </div>
+
+  <h5 class="publicacion-titulo">{{ publicacion.titulo }}</h5>
+  <p class="publicacion-descripcion">{{ publicacion.descripcion }}</p>
+
+  @if (publicacion.imagenUrl) {
+    <img [src]="publicacion.imagenUrl" alt="Imagen de la publicación" class="publicacion-imagen">
+  }
+
+  <div class="publicacion-footer">
+    <button
+      class="btn-like"
+      [class.activo]="publicacion.yaLeDiLike"
+      [disabled]="procesandoLike()"
+      (click)="onClickLike()"
+    >
+      <i class="bi" [class.bi-heart-fill]="publicacion.yaLeDiLike" [class.bi-heart]="!publicacion.yaLeDiLike"></i>
+      {{ publicacion.cantidadLikes }}
+    </button>
+
+    <span class="publicacion-fecha">{{ publicacion.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+  </div>
+
+</div>
