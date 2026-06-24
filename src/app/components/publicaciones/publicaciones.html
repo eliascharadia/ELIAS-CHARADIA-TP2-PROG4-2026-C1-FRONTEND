@@ -1,83 +1,55 @@
-<div class="container posts-container mt-4">
+<div class="publicaciones-page">
 
-  <h3 class="mb-4">🎸 Publicaciones</h3>
-  <!-- FORM CREAR POST -->
-  <div class="card mb-4 shadow-lg post-form">
+  <div class="container">
 
-    <div class="card-body">
-
-      
-      <input type="text"
-             class="form-control mb-2 custom-input"
-             placeholder="Título...">
-
-      <textarea class="form-control mb-2 custom-input"
-                rows="3"
-                placeholder="¿Qué estás pensando?"></textarea>
-
-      <input type="text"
-             class="form-control mb-2 custom-input"
-             placeholder="URL de imagen (opcional)">
-
-      <button class="btn btn-primary custom-btn w-100">
-        Publicar
+    <div class="filtros-orden">
+      <span class="label-orden">Ordenar por:</span>
+      <button
+        class="btn-orden"
+        [class.activo]="orden() === 'fecha'"
+        (click)="cambiarOrden('fecha')"
+      >
+        Más recientes
       </button>
-
+      <button
+        class="btn-orden"
+        [class.activo]="orden() === 'likes'"
+        (click)="cambiarOrden('likes')"
+      >
+        Más populares
+      </button>
     </div>
-  </div>
 
-  <!-- FEED -->
-   @for(post of posts; track post.id){
-  <div class="card mb-3 post-card">
-
-    <div class="card-body">
-
-      <h5>{{ post.title }}</h5>
-
-      <p class="comentario-costum">{{ post.message }}</p>
-
-      <img
-           [src]="post.image"
-           class="post-image mb-3"
-           alt="imagen-post">
-
-      <!-- ACCIONES -->
-      <div class="d-flex justify-content-between align-items-center">
-
-        <button class="btn btn-outline-danger btn-sm"
-                (click)="like(post)">
-          ❤️ Me gusta ({{ post.likes }})
-        </button>
-
-        <span class="comentario-costum">
-          💬 {{ post.comments.length }} comentarios
-        </span>
-
+    @if (cargando()) {
+      <div class="text-center mt-5">
+        <div class="spinner-border text-light" role="status"></div>
       </div>
+    } @else if (publicaciones().length === 0) {
+      <p class="text-center text-secondary mt-5">No hay publicaciones para mostrar.</p>
+    } @else {
 
-      <!-- COMENTARIOS -->
-      <hr>
-      @for(comment of post.comments; track comment.id){
-        <div class="comment-box">
-          💬 {{ comment.contenido }}
-        </div>
+      @for (pub of publicaciones(); track pub._id) {
+        <app-publicacion
+          [publicacion]="pub"
+          [usuarioActualId]="usuarioActualId()"
+          (darLike)="onDarLike($event)"
+          (quitarLike)="onQuitarLike($event)"
+          (eliminar)="onEliminar($event)"
+        />
       }
 
-      <!-- AGREGAR COMENTARIO -->
-      <div class="input-group mt-2">
-        <input type="text"
-               class="form-control custom-input"
-               placeholder="Escribe un comentario..."
-               #commentInput>
-
-        <button class="btn btn-dark custom-btn"
-                >
-          Enviar
+      <div class="paginacion">
+        <button class="btn btn-outline-light" [disabled]="paginaActual() === 0" (click)="paginaAnterior()">
+          Anterior
+        </button>
+        <span class="pagina-info">Página {{ paginaActual() + 1 }}</span>
+        <button class="btn btn-outline-light" [disabled]="publicaciones().length < limitePorPagina" (click)="paginaSiguiente()">
+          Siguiente
         </button>
       </div>
 
-    </div>
+    }
+
   </div>
-}
 
 </div>
