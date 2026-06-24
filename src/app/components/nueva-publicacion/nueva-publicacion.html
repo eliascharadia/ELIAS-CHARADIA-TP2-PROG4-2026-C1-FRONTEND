@@ -1,0 +1,60 @@
+<div class="modal-backdrop-custom" (click)="onClickCerrar()">
+  <div class="modal-box-form" (click)="$event.stopPropagation()">
+
+    <div class="modal-header-custom">
+      <h5>Nueva publicación</h5>
+      <button class="btn-cerrar" (click)="onClickCerrar()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label class="form-label">Título</label>
+        <input type="text" formControlName="titulo" class="form-control custom-input" placeholder="Título de tu publicación">
+        @if (form.get('titulo')?.invalid && form.get('titulo')?.touched) {
+          <div class="text-danger small mt-1">
+            @if (form.get('titulo')?.errors?.['required']) { Este campo es obligatorio }
+            @if (form.get('titulo')?.errors?.['maxlength']) { El título no puede superar los 100 caracteres }
+          </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea rows="4" formControlName="descripcion" class="form-control custom-input" placeholder="¿Qué estás pensando?"></textarea>
+        @if (form.get('descripcion')?.invalid && form.get('descripcion')?.touched) {
+          <div class="text-danger small mt-1">
+            @if (form.get('descripcion')?.errors?.['required']) { Este campo es obligatorio }
+            @if (form.get('descripcion')?.errors?.['maxlength']) { La descripción no puede superar los 1000 caracteres }
+          </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Imagen (opcional)</label>
+        <input type="file" class="form-control custom-input" accept="image/*" (change)="onArchivoSeleccionado($event)">
+
+        @if (imagenPrevista()) {
+          <div class="text-center mt-3 imagen-preview-wrapper">
+            <img [src]="imagenPrevista()" alt="Vista previa" class="imagen-preview">
+            <button type="button" class="btn-quitar-imagen" (click)="quitarImagen()">
+              <i class="bi bi-x-circle-fill"></i>
+            </button>
+          </div>
+        }
+      </div>
+
+      <button type="submit" class="btn btn-publicar w-100" [disabled]="form.invalid || enviando()">
+        @if (enviando()) {
+          Publicando...
+        } @else {
+          Publicar
+        }
+      </button>
+
+    </form>
+
+  </div>
+</div>

@@ -2,6 +2,12 @@
 
   <div class="container">
 
+    <div class="acciones-superiores">
+      <button class="btn btn-nueva-publicacion" (click)="abrirModalNuevaPublicacion()">
+        <i class="bi bi-plus-lg"></i> Nueva publicación
+      </button>
+    </div>
+
     <div class="filtros-orden">
       <span class="label-orden">Ordenar por:</span>
       <button
@@ -49,6 +55,13 @@
       </div>
 
     }
+
+    @if (mostrarModalNuevaPublicacion()) {
+    <app-nueva-publicacion
+      (cerrar)="cerrarModalNuevaPublicacion()"
+      (publicacionCreada)="onPublicacionCreada()"
+    />
+  }
 
   </div>
 
