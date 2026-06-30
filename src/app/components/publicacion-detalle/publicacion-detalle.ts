@@ -9,6 +9,7 @@ import { ComentariosService } from '../../services/comentarios.service.ts';
 import { Comentario } from '../../models/comentario';
 import { ModalService } from '../../services/modal.service.ts';
 import { Publicacion } from '../../components/publicacion/publicacion';
+import { Autenticacion } from '../../services/autenticacion';
 
 type PublicacionConLike = PublicacionModel & { yaLeDiLike: boolean };
 
@@ -24,6 +25,7 @@ export class PublicacionDetalle implements OnInit{
   private publicacionesService = inject(PublicacionesService);
   private comentariosService = inject(ComentariosService);
   private modalService = inject(ModalService);
+  private authService = inject(Autenticacion);
 
   publicacionId = '';
   publicacion = signal<PublicacionConLike | null>(null);
@@ -41,6 +43,8 @@ export class PublicacionDetalle implements OnInit{
   comentarioEnEdicionId = signal<string | null>(null);
   textoEdicion = '';
   guardandoEdicion = signal(false);
+
+  esAdminActual = computed(() => this.authService.esAdmin());
 
   usuarioActualId = computed(() => {
     const usuarioGuardado = localStorage.getItem('usuario');

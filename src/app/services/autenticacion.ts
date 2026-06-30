@@ -70,4 +70,17 @@ export class Autenticacion {
     localStorage.removeItem('usuario');
     this.router.navigate(['/']);
   }
+
+  // Metodos para confirmar si es administrador el usuario actual
+  esAdmin(): boolean {
+    const usuarioGuardado = localStorage.getItem('usuario');
+    if (!usuarioGuardado) return false;
+    return JSON.parse(usuarioGuardado).perfil === 'administrador';
+  }
+
+  obtenerUsuarioActual(): any {
+    const usuarioGuardado = localStorage.getItem('usuario');
+    if (!usuarioGuardado) return null;
+    return JSON.parse(usuarioGuardado);
+  }
 }

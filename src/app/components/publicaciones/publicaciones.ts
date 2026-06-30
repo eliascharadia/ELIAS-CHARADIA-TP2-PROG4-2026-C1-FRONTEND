@@ -5,6 +5,7 @@ import { ModalService } from '../../services/modal.service.ts';
 import { Publicacion } from '../../components/publicacion/publicacion';
 import { Publicacion as PublicacionModel } from '../../models/publicaciones';
 import { NuevaPublicacion } from '../nueva-publicacion/nueva-publicacion';
+import { Autenticacion } from '../../services/autenticacion';
 
 type PublicacionConLike = PublicacionModel & { yaLeDiLike: boolean };
 
@@ -17,6 +18,7 @@ type PublicacionConLike = PublicacionModel & { yaLeDiLike: boolean };
 
 export class Publicaciones implements OnInit {
     private publicacionesService = inject(PublicacionesService);
+    private authService = inject(Autenticacion);
     private modalService = inject(ModalService);
 
     publicaciones = signal<PublicacionConLike[]>([]);
@@ -25,6 +27,8 @@ export class Publicaciones implements OnInit {
     orden = signal<'fecha' | 'likes'>('fecha');
     paginaActual = signal(0);
     limitePorPagina = 3;
+
+    esAdminActual = computed(() => this.authService.esAdmin());
 
     usuarioActualId = computed(() => {
         const usuarioGuardado = localStorage.getItem('usuario');

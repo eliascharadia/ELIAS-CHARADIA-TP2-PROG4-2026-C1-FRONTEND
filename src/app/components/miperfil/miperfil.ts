@@ -1,10 +1,11 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PublicacionesService } from '../../services/publicaciones';
 import { ModalService } from '../../services/modal.service.ts';
 import { Publicacion } from '../../components/publicacion/publicacion';
 import { Publicacion as PublicacionModel } from '../../models/publicaciones';
 import { UsuarioGuardado } from '../../models/usuario';
+import { Autenticacion } from '../../services/autenticacion';
 
 type PublicacionConLike = PublicacionModel & { yaLeDiLike: boolean };
 
@@ -17,10 +18,13 @@ type PublicacionConLike = PublicacionModel & { yaLeDiLike: boolean };
 export class Miperfil implements OnInit {
   private publicacionesService = inject(PublicacionesService);
   private modalService = inject(ModalService);
+  private authService = inject(Autenticacion);
 
   usuario = signal<UsuarioGuardado | null>(null);
   misPublicaciones = signal<PublicacionConLike[]>([]);
   cargandoPublicaciones = signal(false);
+
+  esAdmin = computed(() => this.authService.esAdmin());
 
   get inicialUsuario(): string {
     return this.usuario()?.nombre?.charAt(0).toUpperCase() || '?';
