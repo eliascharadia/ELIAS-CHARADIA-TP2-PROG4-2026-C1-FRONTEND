@@ -1,75 +1,56 @@
 <nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container">
 
-    <div class="container">
+    <a class="navbar-brand logo-container" routerLink="/">
+      <i class="bi bi-piggy-bank-fill logo-icon"></i>
+      <span class="logo-text">RibbieSocial</span>
+    </a>
 
-        <!-- Logo -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <a class="navbar-brand logo-container" routerLink="/">
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav mx-auto">
 
-            <i class="bi bi-piggy-bank-fill logo-icon"></i>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/publicaciones">
+            <i class="bi bi-newspaper"></i>
+            Publicaciones
+          </a>
+        </li>
 
-            <span class="logo-text">
-                RibbieSocial
-            </span>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/mi-perfil">
+            <i class="bi bi-person-circle"></i>
+            Mi Perfil
+          </a>
+        </li>
 
-        </a>
+        @if (authService.esAdmin()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard/usuarios">
+              <i class="bi bi-people"></i>
+              Usuarios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard/estadisticas">
+              <i class="bi bi-bar-chart-line"></i>
+              Estadísticas
+            </a>
+          </li>
+        }
 
-        <!-- Botón responsive -->
+      </ul>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-
-            <span class="navbar-toggler-icon"></span>
-
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn custom-btn-glass" (click)="cerrarSesion()">
+          <i class="bi bi-box-arrow-right"></i>
+          Salir
         </button>
-
-        <!-- Navegación -->
-
-        <div class="collapse navbar-collapse" id="navbarContent">
-
-            <ul class="navbar-nav mx-auto">
-
-                <li class="nav-item">
-
-                    <a class="nav-link" routerLink="/publicaciones">
-
-                        <i class="bi bi-newspaper"></i>
-
-                        Publicaciones
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link" routerLink="/mi-perfil">
-
-                        <i class="bi bi-person-circle"></i>
-
-                        Mi Perfil
-
-                    </a>
-
-                </li>
-
-            </ul>
-
-            <!-- Usuario -->
-
-            <div class="d-flex align-items-center gap-3">
-
-                <button class="btn custom-btn-glass">
-
-                    <i class="bi bi-box-arrow-right"></i>
-
-                    Salir
-
-                </button>
-
-            </div>
-
-        </div>
+      </div>
 
     </div>
-
+  </div>
 </nav>
