@@ -12,6 +12,7 @@ import { Publicacion as PublicacionModel } from '../../models/publicaciones';
 export class Publicacion {
   @Input({ required: true }) publicacion!: PublicacionModel & { yaLeDiLike: boolean };
   @Input() usuarioActualId: string | null = null;
+  @Input() esAdmin: boolean = false;
 
   @Output() darLike = new EventEmitter<string>();
   @Output() quitarLike = new EventEmitter<string>();
@@ -25,6 +26,11 @@ export class Publicacion {
 
   get inicialAutor(): string {
     return this.publicacion.autor.nombre?.charAt(0).toUpperCase() || '?';
+  }
+
+  get puedeEliminar(): boolean {
+    if (!this.usuarioActualId) return false;
+    return this.esAdmin || this.publicacion.autor._id === this.usuarioActualId;
   }
 
   onClickLike(): void {

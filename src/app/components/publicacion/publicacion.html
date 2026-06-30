@@ -11,7 +11,7 @@
       <span class="autor-usuario">&#64;{{ publicacion.autor.nombreUsuario }}</span>
     </div>
 
-    @if (esMiPublicacion) {
+    @if (puedeEliminar) {
       <button class="btn-eliminar" (click)="onClickEliminar()" title="Eliminar publicación">
         <i class="bi bi-trash"></i>
       </button>
