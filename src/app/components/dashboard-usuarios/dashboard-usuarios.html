@@ -1,1 +1,175 @@
-<p>dashboard-usuarios works!</p>
+<div class="dashboard-page">
+  <div class="container">
+
+    <div class="dashboard-header">
+      <h2>Gestión de Usuarios</h2>
+      <button class="btn btn-nueva-publicacion" (click)="mostrarModalCrear.set(true)">
+        <i class="bi bi-person-plus"></i> Nuevo usuario
+      </button>
+    </div>
+
+    @if (cargando()) {
+      <div class="text-center mt-5">
+        <div class="spinner-border text-light" role="status"></div>
+      </div>
+    } @else if (usuarios().length === 0) {
+      <p class="text-secondary text-center mt-5">No hay usuarios registrados.</p>
+    } @else {
+
+      <div class="tabla-wrapper">
+        <table class="tabla-usuarios">
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Correo</th>
+              <th>Perfil</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (usuario of usuarios(); track usuario._id) {
+              <tr [class.deshabilitado]="!usuario.habilitado">
+                <td>
+                  <strong>{{ usuario.nombre }} {{ usuario.apellido }}</strong>
+                  <span class="texto-secundario">&#64;{{ usuario.nombreUsuario }}</span>
+                </td>
+                <td>{{ usuario.correo }}</td>
+                <td>
+                  <span class="badge-perfil" [class.admin]="usuario.perfil === 'administrador'">
+                    {{ usuario.perfil }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge-estado" [class.activo]="usuario.habilitado">
+                    {{ usuario.habilitado ? 'Activo' : 'Deshabilitado' }}
+                  </span>
+                </td>
+                <td>
+                  @if (usuario.habilitado) {
+                    <button class="btn-accion deshabilitar" (click)="onDeshabilitar(usuario)">
+                      <i class="bi bi-person-slash"></i> Deshabilitar
+                    </button>
+                  } @else {
+                    <button class="btn-accion habilitar" (click)="onHabilitar(usuario)">
+                      <i class="bi bi-person-check"></i> Habilitar
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+    }
+
+  </div>
+</div>
+
+@if (mostrarModalCrear()) {
+  <div class="modal-backdrop-custom" (click)="mostrarModalCrear.set(false)">
+    <div class="modal-box-form" (click)="$event.stopPropagation()">
+
+      <div class="modal-header-custom">
+        <h5>Nuevo usuario</h5>
+        <button class="btn-cerrar" (click)="mostrarModalCrear.set(false)">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onCrear()">
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control custom-input" placeholder="Nombre">
+            @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+              <div class="text-danger small mt-1">El nombre es obligatorio</div>
+            }
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Apellido</label>
+            <input type="text" formControlName="apellido" class="form-control custom-input" placeholder="Apellido">
+            @if (form.get('apellido')?.invalid && form.get('apellido')?.touched) {
+              <div class="text-danger small mt-1">El apellido es obligatorio</div>
+            }
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Correo</label>
+            <input type="email" formControlName="correo" class="form-control custom-input" placeholder="Correo">
+            @if (form.get('correo')?.invalid && form.get('correo')?.touched) {
+              <div class="text-danger small mt-1">Ingresá un correo válido</div>
+            }
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nombre de usuario</label>
+            <input type="text" formControlName="nombreUsuario" class="form-control custom-input" placeholder="Nombre de usuario">
+            @if (form.get('nombreUsuario')?.invalid && form.get('nombreUsuario')?.touched) {
+              <div class="text-danger small mt-1">El nombre de usuario es obligatorio</div>
+            }
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Contraseña</label>
+            <input type="password" formControlName="password" class="form-control custom-input" placeholder="Contraseña">
+            @if (form.get('password')?.invalid && form.get('password')?.touched) {
+              <div class="text-danger small mt-1">
+                @if (form.get('password')?.errors?.['required']) { La contraseña es obligatoria }
+                @if (form.get('password')?.errors?.['minlength']) { Mínimo 8 caracteres }
+                @if (form.get('password')?.errors?.['pattern']) { Debe tener al menos una mayúscula y un número }
+              </div>
+            }
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Repetir contraseña</label>
+            <input type="password" formControlName="confirmPassword" class="form-control custom-input" placeholder="Repetir contraseña">
+            @if (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched) {
+                <div class="text-danger small mt-1">Debés repetir la contraseña</div>
+            }
+            @if (form.errors?.['coinciden'] && form.get('confirmPassword')?.touched) {
+                <div class="text-danger small mt-1">Las contraseñas no coinciden</div>
+            }
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Fecha de nacimiento</label>
+            <input type="date" formControlName="fechaNacimiento" class="form-control custom-input">
+            @if (form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched) {
+              <div class="text-danger small mt-1">La fecha de nacimiento es obligatoria</div>
+            }
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Descripción (opcional)</label>
+          <textarea rows="2" formControlName="descripcion" class="form-control custom-input" placeholder="Descripción breve"></textarea>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Perfil</label>
+          <div class="radio-group">
+            <label class="radio-opcion">
+              <input type="radio" formControlName="perfil" value="usuario">
+              <span>Usuario</span>
+            </label>
+            <label class="radio-opcion">
+              <input type="radio" formControlName="perfil" value="administrador">
+              <span>Administrador</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-publicar w-100" [disabled]="form.invalid || enviando()">
+          @if (enviando()) { Creando... } @else { Crear usuario }
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+}
