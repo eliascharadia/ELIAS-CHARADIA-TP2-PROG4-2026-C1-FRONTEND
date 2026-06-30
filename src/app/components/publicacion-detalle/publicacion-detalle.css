@@ -23,18 +23,31 @@
 }
 
 
-textarea {
-  outline: none;
-  resize: none;
-  background-color: #c3903e;
-  border-color: #1e1e1e;
-  
+
+.custom-input {
+
+    background: rgba(44, 44, 44, 0.596);
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    color: white;
 }
 
-textarea:focus {
-  box-shadow:  0 0 8px rgba(0, 0, 0, 0.6);
-  background-color: #9c6408;
-  border-color: #1e1e1e;
+.custom-input::placeholder {
+
+    color: rgba(5, 5, 5, 0.925);
+}
+
+.custom-input:focus {
+
+    background: rgba(44, 44, 44, 0.596);
+
+    color: white;
+
+    border-color: rgb(255, 200, 61);
+
+    box-shadow:
+        0 0 0 .2rem rgba(255,200,61,.25);
 }
 
 .comentario-item {
