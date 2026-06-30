@@ -1,0 +1,64 @@
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2100; /* arriba del loader y de otros modales */
+}
+
+.modal-box-sesion {
+  background: #1e1e1e;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-box-sesion h5 {
+  color: #c3903e;
+  margin-bottom: 0.75rem;
+}
+
+.acciones-modal-sesion {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.acciones-modal-sesion button {
+  flex: 1;
+}
+
+.btn-publicar {
+  height: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all .3s;
+  background-color: #c3903e;
+  border-color: #945d1b;
+  color: #fff;
+}
+
+.btn-publicar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255,200,61,.4);
+  color: #fff;
+}
+
+.btn-publicar:active:not(:disabled) {
+  background-color: #945d1b;
+  transform: scale(0.98);
+  border-color: rgba(255,200,61,.4);
+}
+
+.btn-publicar:disabled {
+  background-color: #5a4a35;
+  border-color: #5a4a35;
+  opacity: 0.6;
+  cursor: not-allowed;
+}

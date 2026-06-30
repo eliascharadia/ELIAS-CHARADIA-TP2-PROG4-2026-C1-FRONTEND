@@ -52,6 +52,14 @@ export class Autenticacion {
     });
   }
 
+  autorizar() {
+    return this.http.post(`${this.apiUrl}/autenticacion/autorizar`, {});
+  }
+
+  refrescar() {
+    return this.http.post(`${this.apiUrl}/autenticacion/refrescar`, {});
+  }
+
   guardarSesion(respuesta: RespuestaLogin) {
     localStorage.setItem('token', respuesta.token);
     localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));

@@ -99,3 +99,11 @@
   font-size: 1.1rem;
   flex-shrink: 0;
 }
+
+.clickeable {
+  cursor: pointer;
+}
+
+.clickeable:hover {
+  text-decoration: underline;
+}

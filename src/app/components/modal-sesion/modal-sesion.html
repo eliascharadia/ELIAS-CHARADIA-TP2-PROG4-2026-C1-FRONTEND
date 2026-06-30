@@ -1,0 +1,25 @@
+@if (sesionService.mostrarModalExtension()) {
+  <div class="modal-backdrop-custom">
+    <div class="modal-box-sesion">
+      <h5>Tu sesión está por expirar</h5>
+      <p>Quedan 5 minutos antes de que se cierre tu sesión. ¿Querés extenderla?</p>
+
+      <div class="acciones-modal-sesion">
+        <button
+          class="btn btn-publicar"
+          [disabled]="sesionService.extendiendoSesion()"
+          (click)="sesionService.extenderSesion()"
+        >
+          @if (sesionService.extendiendoSesion()) { Extendiendo... } @else { Extender sesión }
+        </button>
+        <button
+          class="btn btn-outline-light"
+          [disabled]="sesionService.extendiendoSesion()"
+          (click)="sesionService.cerrarSesion()"
+        >
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </div>
+}

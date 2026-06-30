@@ -18,7 +18,10 @@
     }
   </div>
 
-  <h5 class="publicacion-titulo">{{ publicacion.titulo }}</h5>
+  <h5 class="publicacion-titulo clickeable" [routerLink]="['/publicaciones', publicacion._id]">
+    {{ publicacion.titulo }}
+  </h5>
+  <!-- <h5 class="publicacion-titulo">{{ publicacion.titulo }}</h5> -->
   <p class="publicacion-descripcion">{{ publicacion.descripcion }}</p>
 
   @if (publicacion.imagenUrl) {

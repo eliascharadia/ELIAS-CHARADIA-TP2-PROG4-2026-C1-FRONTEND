@@ -1,0 +1,97 @@
+.detalle-page {
+  padding: 2rem 0;
+  min-height: 100vh;
+
+  position: relative;
+    z-index: 2;
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+}
+
+.detalle-page .container {
+  max-width: 600px;
+}
+
+.comentarios-section {
+  margin-top: 1.5rem;
+}
+
+.comentarios-section h5 {
+  color: #9c6408;
+  margin-bottom: 1rem;
+}
+
+
+textarea {
+  outline: none;
+  resize: none;
+  background-color: #c3903e;
+  border-color: #1e1e1e;
+  
+}
+
+textarea:focus {
+  box-shadow:  0 0 8px rgba(0, 0, 0, 0.6);
+  background-color: #9c6408;
+  border-color: #1e1e1e;
+}
+
+.comentario-item {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.comentario-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: #c3903e;
+}
+
+.comentario-fecha {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.comentario-mensaje {
+  margin-bottom: 0.5rem;
+  color: #ddd;
+}
+
+.comentario-editado {
+  font-size: 0.75rem;
+  color: #888;
+  font-style: italic;
+}
+
+.btn-editar-comentario {
+  background: none;
+  border: none;
+  color: #c3903e;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.acciones-edicion {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.autor-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.autor-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
