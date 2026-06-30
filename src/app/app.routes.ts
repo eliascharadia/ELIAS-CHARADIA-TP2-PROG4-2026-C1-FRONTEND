@@ -35,5 +35,19 @@ export const routes: Routes = [
                 .then(m => m.PublicacionDetalle),
         canActivate: [authGuard]
     },
+    {
+        path: 'dashboard/usuarios',
+        loadComponent: () =>
+            import('./components/dashboard-usuarios/dashboard-usuarios')
+                .then(m => m.DashboardUsuarios),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'dashboard/estadisticas',
+        loadComponent: () =>
+            import('./components/dashboard-estadisticas/dashboard-estadisticas')
+                .then(m => m.DashboardEstadisticas),
+        canActivate: [authGuard]
+    },
     { path: '**', redirectTo: '' }
 ];
