@@ -61,6 +61,7 @@
         <app-publicacion
           [publicacion]="pub"
           [usuarioActualId]="usuario()?._id ?? null"
+          [esAdmin]="esAdmin()"
           (darLike)="onDarLike($event)"
           (quitarLike)="onQuitarLike($event)"
           (eliminar)="onEliminar($event)"
