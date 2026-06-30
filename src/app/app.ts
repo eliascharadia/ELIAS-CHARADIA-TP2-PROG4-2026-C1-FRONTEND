@@ -4,10 +4,11 @@ import { Header } from './components/header/header';
 import { Modal } from './components/modal/modal';
 import { Cargando } from './components/cargando/cargando';
 import { CargandoService } from './services/cargando.service';
+import { ModalSesion } from './components/modal-sesion/modal-sesion';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Modal, Cargando],
+  imports: [RouterOutlet, Header, Modal, Cargando, ModalSesion],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
