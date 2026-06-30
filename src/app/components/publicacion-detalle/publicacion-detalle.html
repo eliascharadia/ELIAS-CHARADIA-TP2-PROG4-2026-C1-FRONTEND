@@ -1,0 +1,113 @@
+<div class="detalle-page">
+  <div class="container">
+
+    @if (cargandoPublicacion()) {
+      <div class="text-center mt-5">
+        <div class="spinner-border text-light" role="status"></div>
+      </div>
+    } @else if (publicacion()) {
+
+      <app-publicacion
+        [publicacion]="publicacion()!"
+        [usuarioActualId]="usuarioActualId()"
+        (darLike)="onDarLike($event)"
+        (quitarLike)="onQuitarLike($event)"
+        (eliminar)="onEliminar($event)"
+      />
+
+      <div class="comentarios-section">
+        <h5>Comentarios</h5>
+
+        <div class="nuevo-comentario">
+          <textarea
+            [(ngModel)]="nuevoComentario"
+            class="form-control custom-input"
+            rows="2"
+            placeholder="Escribí un comentario..."
+          ></textarea>
+          <button
+            class="btn btn-publicar mt-2"
+            [disabled]="!nuevoComentario.trim() || enviandoComentario()"
+            (click)="onEnviarComentario()"
+          >
+            @if (enviandoComentario()) { Enviando... } @else { Comentar }
+          </button>
+        </div>
+
+        <div class="lista-comentarios mt-3">
+          @for (comentario of comentarios(); track comentario._id) {
+
+            <div class="comentario-item">
+              
+              <div class="comentario-header">
+                @if (comentario.autor.fotoPerfilUrl) {
+                <img [src]="comentario.autor.fotoPerfilUrl" alt="Foto de perfil" class="autor-avatar">
+                } @else {
+                <div class="autor-avatar-inicial">{{ obtenerInicialAutor(comentario.autor.nombre) }}</div>
+                }
+                <div class="autor-info">
+                  <strong>{{ comentario.autor.nombre }} {{ comentario.autor.apellido }}</strong>
+                </div>
+                <span class="comentario-fecha">{{ comentario.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+
+              @if (comentarioEnEdicionId() === comentario._id) {
+
+                <textarea
+                  [(ngModel)]="textoEdicion"
+                  class="form-control custom-input mt-2"
+                  rows="2"
+                ></textarea>
+                <div class="acciones-edicion mt-2">
+                  <button
+                    class="btn btn-sm btn-publicar"
+                    [disabled]="!textoEdicion.trim() || guardandoEdicion()"
+                    (click)="guardarEdicion(comentario._id)"
+                  >
+                    Guardar
+                  </button>
+                  <button class="btn btn-sm btn-outline-light" (click)="cancelarEdicion()">
+                    Cancelar
+                  </button>
+                </div>
+
+              } @else {
+
+                <p class="comentario-mensaje">
+                  {{ comentario.mensaje }}
+                  @if (comentario.modificado) {
+                    <span class="comentario-editado">(editado)</span>
+                  }
+                </p>
+
+                @if (esMiComentario(comentario)) {
+                  <button class="btn-editar-comentario" (click)="iniciarEdicion(comentario)">
+                    Editar
+                  </button>
+                }
+
+              }
+
+            </div>
+
+          } @empty {
+            <p class="text-secondary">Sé el primero en comentar.</p>
+          }
+        </div>
+
+        @if (hayMasComentarios()) {
+          <div class="text-center mt-3">
+            <button class="btn btn-outline-light" [disabled]="cargandoComentarios()" (click)="cargarComentarios()">
+              @if (cargandoComentarios()) { Cargando... } @else { Cargar más }
+            </button>
+          </div>
+        }
+
+      </div>
+
+    } @else {
+      <p class="text-center text-secondary mt-5">No se encontró la publicación.</p>
+    }
+
+  </div>
+</div>
