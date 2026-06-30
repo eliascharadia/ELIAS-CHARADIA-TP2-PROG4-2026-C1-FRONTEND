@@ -34,6 +34,10 @@ export class PublicacionesService {
     return this.http.post(`${this.apiUrl}/publicaciones`, formData);
   }
 
+  obtenerPorId(id: string) {
+    return this.http.get<Publicacion & { yaLeDiLike: boolean }>(`${this.apiUrl}/publicaciones/${id}`);
+  }
+
   eliminar(id: string) {
     return this.http.delete(`${this.apiUrl}/publicaciones/${id}`);
   }
