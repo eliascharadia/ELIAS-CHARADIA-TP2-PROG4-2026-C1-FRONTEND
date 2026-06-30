@@ -5,7 +5,7 @@ import { passwordMatchValidator } from '../../validators/confirmPassword.Validat
 import { minimaEdadValidador } from '../../validators/fechaNacimiento.Validator';
 import { ModalService } from '../../services/modal.service.ts';
 import { Autenticacion } from '../../services/autenticacion';
-
+import { SesionService } from '../../services/sesion.service';
 
 @Component({
   selector: 'app-registro',
@@ -17,6 +17,7 @@ export class Registro {
   private fb = inject(FormBuilder);
   private authService = inject(Autenticacion);
   private modalService = inject(ModalService);
+  private sesionService = inject(SesionService);
   private router = inject(Router);
 
   archivoSeleccionado: File | null = null;
@@ -89,14 +90,16 @@ export class Registro {
       descripcion: valores.descripcion!,
       imagenPerfil: this.archivoSeleccionado
     }).subscribe({ // me subscribo
-      next: () => {
+      next: (respuesta: any) => {
         this.cargando.set(false);
+        this.authService.guardarSesion(respuesta);
+        this.sesionService.iniciarContador();
         this.modalService.mostrar(
           'Tu cuenta fue creada con éxito. Ya podés iniciar sesión.',
           'exito',
           '¡Registro exitoso!'
         );
-        this.router.navigate(['/']);
+        this.router.navigate(['/publicaciones']);
       },
       error: (err) => {
         this.cargando.set(false);
