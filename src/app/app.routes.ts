@@ -25,5 +25,11 @@ export const routes: Routes = [
             import('./components/miperfil/miperfil')
                 .then(m => m.Miperfil)
     },
+    {
+        path: 'publicaciones/:id',
+        loadComponent: () =>
+            import('./components/publicacion-detalle/publicacion-detalle')
+                .then(m => m.PublicacionDetalle)
+    },
     { path: '**', redirectTo: '' }
 ];
