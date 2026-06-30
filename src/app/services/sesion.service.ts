@@ -36,8 +36,8 @@ export class SesionService {
       return;
     }
 
-    // const segundosHastaAviso = segundosHastaExpirar - MINUTOS_AVISO_PREVIO * 60;
-    const segundosHastaAviso = segundosHastaExpirar - 10;
+    const segundosHastaAviso = segundosHastaExpirar - MINUTOS_AVISO_PREVIO * 60;
+    // const segundosHastaAviso = segundosHastaExpirar - 10;
 
     if (segundosHastaAviso > 0) {
       this.timerAviso = setTimeout(() => {
@@ -84,16 +84,13 @@ export class SesionService {
   cerrarSesion(): void {
     this.mostrarModalExtension.set(false);
     this.detenerContador();
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
-    this.router.navigate(['/']);
+    this.authService.cerrarSesion();
   }
 
   private expirarSesion(): void {
     this.mostrarModalExtension.set(false);
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
-    this.router.navigate(['/']);
+    this.detenerContador();
+    this.authService.cerrarSesion(); 
   }
 
   private decodificarToken(token: string): { exp: number } | null {
