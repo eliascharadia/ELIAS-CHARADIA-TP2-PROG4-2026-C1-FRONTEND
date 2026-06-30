@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { emailOrUsernameValidator } from '../../validators/emailOrUsernameValidator';
 import { Autenticacion } from '../../services/autenticacion';
 import { ModalService } from '../../services/modal.service.ts';
+import { SesionService } from '../../services/sesion.service';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class Login {
   private authService = inject(Autenticacion);
   private modalService = inject(ModalService);
   private router = inject(Router);
+  private sesionService = inject(SesionService);
+
   cargando = signal(false);
 
   loginForm = this.fb.group({
@@ -45,6 +48,7 @@ export class Login {
       next: (respuesta) => {
         this.cargando.set(false);
         this.authService.guardarSesion(respuesta);
+        this.sesionService.iniciarContador(); // arranca el contador
         this.router.navigate(['/publicaciones']);
       },
       error: (err) => {
