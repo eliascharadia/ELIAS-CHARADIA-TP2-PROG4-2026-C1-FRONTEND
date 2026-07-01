@@ -7,9 +7,12 @@ import { TiempoRelativoPipe } from '../../pipes/tiempo-relativo-pipe';
 import { TruncarTextoPipe } from '../../pipes/truncar-texto-pipe';
 import { InicialPipe } from '../../pipes/inicial-pipe';
 
+import { TooltipDirective } from '../../directives/tooltip';
+import { ResaltarAdminDirective } from '../../directives/resaltar-admin';
+
 @Component({
   selector: 'app-publicacion',
-  imports: [CommonModule, RouterModule, TiempoRelativoPipe, TruncarTextoPipe, InicialPipe],
+  imports: [CommonModule, RouterModule, TiempoRelativoPipe, TruncarTextoPipe, InicialPipe, TooltipDirective, ResaltarAdminDirective],
   templateUrl: './publicacion.html',
   styleUrl: './publicacion.css',
 })
