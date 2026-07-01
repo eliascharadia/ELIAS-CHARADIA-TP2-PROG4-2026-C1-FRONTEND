@@ -1,1 +1,55 @@
-<p>dashboard-estadisticas works!</p>
+<div class="dashboard-page">
+  <div class="container">
+
+    <h2 class="dashboard-titulo">Estadísticas</h2>
+
+    <!-- Selector de fechas -->
+    <div class="filtro-fechas">
+      <div class="fecha-grupo">
+        <label>Desde</label>
+        <input
+          type="date"
+          class="form-control custom-input"
+          [value]="desde()"
+          (change)="desde.set($any($event.target).value)"
+        >
+      </div>
+      <div class="fecha-grupo">
+        <label>Hasta</label>
+        <input
+          type="date"
+          class="form-control custom-input"
+          [value]="hasta()"
+          (change)="hasta.set($any($event.target).value)"
+        >
+      </div>
+      <button class="btn btn-nueva-publicacion" (click)="cargarTodo()" [disabled]="cargando()">
+        @if (cargando()) { Cargando... } @else { Aplicar filtro }
+      </button>
+    </div>
+
+    @if (cargando()) {
+      <div class="text-center mt-5">
+        <div class="spinner-border text-light" role="status"></div>
+      </div>
+    }
+
+    <!-- Los canvas siempre están en el DOM, solo se ocultan visualmente mientras carga -->
+    <div class="graficos-grid" [style.display]="cargando() ? 'none' : 'grid'">
+
+      <div class="grafico-card">
+        <canvas #chartBarras></canvas>
+      </div>
+
+      <div class="grafico-card">
+        <canvas #chartLineas></canvas>
+      </div>
+
+      <div class="grafico-card grafico-torta">
+        <canvas #chartTorta></canvas>
+      </div>
+
+    </div>
+
+  </div>
+</div>
