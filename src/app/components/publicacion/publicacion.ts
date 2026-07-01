@@ -3,9 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Publicacion as PublicacionModel } from '../../models/publicaciones';
 
+import { TiempoRelativoPipe } from '../../pipes/tiempo-relativo-pipe';
+import { TruncarTextoPipe } from '../../pipes/truncar-texto-pipe';
+import { InicialPipe } from '../../pipes/inicial-pipe';
+
 @Component({
   selector: 'app-publicacion',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TiempoRelativoPipe, TruncarTextoPipe, InicialPipe],
   templateUrl: './publicacion.html',
   styleUrl: './publicacion.css',
 })

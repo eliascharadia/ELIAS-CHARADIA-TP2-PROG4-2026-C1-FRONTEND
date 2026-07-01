@@ -4,7 +4,7 @@
     @if (publicacion.autor.fotoPerfilUrl) {
       <img [src]="publicacion.autor.fotoPerfilUrl" alt="Foto de perfil" class="autor-avatar">
     } @else {
-      <div class="autor-avatar-inicial">{{ inicialAutor }}</div>
+      <div class="autor-avatar-inicial">{{ publicacion.autor.nombre | inicial }}</div>
     }
     <div class="autor-info">
       <span class="autor-nombre">{{ publicacion.autor.nombre }} {{ publicacion.autor.apellido }}</span>
@@ -19,7 +19,7 @@
   </div>
 
   <h5 class="publicacion-titulo clickeable" [routerLink]="['/publicaciones', publicacion._id]">
-    {{ publicacion.titulo }}
+    {{ publicacion.titulo | truncarTexto:60 }}
   </h5>
   <!-- <h5 class="publicacion-titulo">{{ publicacion.titulo }}</h5> -->
   <p class="publicacion-descripcion">{{ publicacion.descripcion }}</p>
@@ -39,7 +39,7 @@
       {{ publicacion.cantidadLikes }}
     </button>
 
-    <span class="publicacion-fecha">{{ publicacion.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+    <span class="publicacion-fecha">{{ publicacion.createdAt | tiempoRelativo }}</span>
   </div>
 
 </div>

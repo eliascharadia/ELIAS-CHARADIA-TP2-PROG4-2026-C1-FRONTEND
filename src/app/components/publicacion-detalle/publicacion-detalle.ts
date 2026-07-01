@@ -10,12 +10,13 @@ import { Comentario } from '../../models/comentario';
 import { ModalService } from '../../services/modal.service.ts';
 import { Publicacion } from '../../components/publicacion/publicacion';
 import { Autenticacion } from '../../services/autenticacion';
+import { TiempoRelativoPipe } from '../../pipes/tiempo-relativo-pipe';
 
 type PublicacionConLike = PublicacionModel & { yaLeDiLike: boolean };
 
 @Component({
   selector: 'app-publicacion-detalle',
-  imports: [CommonModule, RouterModule, FormsModule, Publicacion],
+  imports: [CommonModule, RouterModule, FormsModule, Publicacion, TiempoRelativoPipe],
   templateUrl: './publicacion-detalle.html',
   styleUrl: './publicacion-detalle.css',
 })
