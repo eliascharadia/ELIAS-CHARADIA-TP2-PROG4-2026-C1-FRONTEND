@@ -9,12 +9,14 @@ import { ComentariosService } from '../../services/comentarios.service.ts';
 import { Comentario } from '../../models/comentario';
 import { ModalService } from '../../services/modal.service.ts';
 import { Publicacion } from '../../components/publicacion/publicacion';
+import { Autenticacion } from '../../services/autenticacion';
+import { TiempoRelativoPipe } from '../../pipes/tiempo-relativo-pipe';
 
 type PublicacionConLike = PublicacionModel & { yaLeDiLike: boolean };
 
 @Component({
   selector: 'app-publicacion-detalle',
-  imports: [CommonModule, RouterModule, FormsModule, Publicacion],
+  imports: [CommonModule, RouterModule, FormsModule, Publicacion, TiempoRelativoPipe],
   templateUrl: './publicacion-detalle.html',
   styleUrl: './publicacion-detalle.css',
 })
@@ -24,6 +26,7 @@ export class PublicacionDetalle implements OnInit{
   private publicacionesService = inject(PublicacionesService);
   private comentariosService = inject(ComentariosService);
   private modalService = inject(ModalService);
+  private authService = inject(Autenticacion);
 
   publicacionId = '';
   publicacion = signal<PublicacionConLike | null>(null);
@@ -41,6 +44,8 @@ export class PublicacionDetalle implements OnInit{
   comentarioEnEdicionId = signal<string | null>(null);
   textoEdicion = '';
   guardandoEdicion = signal(false);
+
+  esAdminActual = computed(() => this.authService.esAdmin());
 
   usuarioActualId = computed(() => {
     const usuarioGuardado = localStorage.getItem('usuario');

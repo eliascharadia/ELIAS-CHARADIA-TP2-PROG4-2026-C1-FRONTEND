@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
@@ -16,6 +16,19 @@ export class Autenticacion {
   private router = inject(Router);
   private apiUrl = environment.apiUrl;
 
+  // Signal central — fuente de verdad del usuario actual
+  private _usuarioActual = signal<any | null>(
+    this.leerUsuarioDeStorage()
+  );
+
+  // Computed públicos para consumir en componentes
+  usuarioActual = computed(() => this._usuarioActual());
+  esAdmin = computed(() => this._usuarioActual()?.perfil === 'administrador');
+
+  private leerUsuarioDeStorage(): any | null {
+    const guardado = localStorage.getItem('usuario');
+    return guardado ? JSON.parse(guardado) : null;
+  }
 
   registrar(datos: {
     name: string;
@@ -63,11 +76,20 @@ export class Autenticacion {
   guardarSesion(respuesta: RespuestaLogin) {
     localStorage.setItem('token', respuesta.token);
     localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));
+    this._usuarioActual.set(respuesta.usuario);
   }
 
   cerrarSesion() {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
+    this._usuarioActual.set(null);
     this.router.navigate(['/']);
+  }
+
+  // Metodos para confirmar si es administrador el usuario actual
+  obtenerUsuarioActual(): any {
+    const usuarioGuardado = localStorage.getItem('usuario');
+    if (!usuarioGuardado) return null;
+    return JSON.parse(usuarioGuardado);
   }
 }

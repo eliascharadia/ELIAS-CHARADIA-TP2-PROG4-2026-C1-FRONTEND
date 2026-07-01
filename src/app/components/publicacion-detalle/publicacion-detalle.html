@@ -10,6 +10,7 @@
       <app-publicacion
         [publicacion]="publicacion()!"
         [usuarioActualId]="usuarioActualId()"
+        [esAdmin]="esAdminActual()"
         (darLike)="onDarLike($event)"
         (quitarLike)="onQuitarLike($event)"
         (eliminar)="onEliminar($event)"
@@ -48,7 +49,7 @@
                 <div class="autor-info">
                   <strong>{{ comentario.autor.nombre }} {{ comentario.autor.apellido }}</strong>
                 </div>
-                <span class="comentario-fecha">{{ comentario.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+                <span class="comentario-fecha">{{ comentario.createdAt | tiempoRelativo  }}</span>
               </div>
 
               @if (comentarioEnEdicionId() === comentario._id) {

@@ -1,17 +1,17 @@
-<div class="publicacion-card">
+<div class="publicacion-card" appResaltarAdmin>
 
   <div class="publicacion-header">
     @if (publicacion.autor.fotoPerfilUrl) {
       <img [src]="publicacion.autor.fotoPerfilUrl" alt="Foto de perfil" class="autor-avatar">
     } @else {
-      <div class="autor-avatar-inicial">{{ inicialAutor }}</div>
+      <div class="autor-avatar-inicial">{{ publicacion.autor.nombre | inicial }}</div>
     }
     <div class="autor-info">
       <span class="autor-nombre">{{ publicacion.autor.nombre }} {{ publicacion.autor.apellido }}</span>
       <span class="autor-usuario">&#64;{{ publicacion.autor.nombreUsuario }}</span>
     </div>
 
-    @if (esMiPublicacion) {
+    @if (puedeEliminar) {
       <button class="btn-eliminar" (click)="onClickEliminar()" title="Eliminar publicación">
         <i class="bi bi-trash"></i>
       </button>
@@ -19,7 +19,7 @@
   </div>
 
   <h5 class="publicacion-titulo clickeable" [routerLink]="['/publicaciones', publicacion._id]">
-    {{ publicacion.titulo }}
+    {{ publicacion.titulo | truncarTexto:60 }}
   </h5>
   <!-- <h5 class="publicacion-titulo">{{ publicacion.titulo }}</h5> -->
   <p class="publicacion-descripcion">{{ publicacion.descripcion }}</p>
@@ -34,12 +34,20 @@
       [class.activo]="publicacion.yaLeDiLike"
       [disabled]="procesandoLike()"
       (click)="onClickLike()"
+      [appTooltip]="publicacion.yaLeDiLike ? 'Quitar me gusta' : 'Me gusta'"
     >
       <i class="bi" [class.bi-heart-fill]="publicacion.yaLeDiLike" [class.bi-heart]="!publicacion.yaLeDiLike"></i>
       {{ publicacion.cantidadLikes }}
     </button>
+    <button
+      class="btn-eliminar"
+      (click)="onClickEliminar()"
+      appTooltip="Eliminar publicación"
+    >
+      <i class="bi bi-trash"></i>
+    </button>
 
-    <span class="publicacion-fecha">{{ publicacion.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+    <span class="publicacion-fecha">{{ publicacion.createdAt | tiempoRelativo }}</span>
   </div>
 
 </div>

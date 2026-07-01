@@ -3,15 +3,23 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Publicacion as PublicacionModel } from '../../models/publicaciones';
 
+import { TiempoRelativoPipe } from '../../pipes/tiempo-relativo-pipe';
+import { TruncarTextoPipe } from '../../pipes/truncar-texto-pipe';
+import { InicialPipe } from '../../pipes/inicial-pipe';
+
+import { TooltipDirective } from '../../directives/tooltip';
+import { ResaltarAdminDirective } from '../../directives/resaltar-admin';
+
 @Component({
   selector: 'app-publicacion',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TiempoRelativoPipe, TruncarTextoPipe, InicialPipe, TooltipDirective, ResaltarAdminDirective],
   templateUrl: './publicacion.html',
   styleUrl: './publicacion.css',
 })
 export class Publicacion {
   @Input({ required: true }) publicacion!: PublicacionModel & { yaLeDiLike: boolean };
   @Input() usuarioActualId: string | null = null;
+  @Input() esAdmin: boolean = false;
 
   @Output() darLike = new EventEmitter<string>();
   @Output() quitarLike = new EventEmitter<string>();
@@ -25,6 +33,11 @@ export class Publicacion {
 
   get inicialAutor(): string {
     return this.publicacion.autor.nombre?.charAt(0).toUpperCase() || '?';
+  }
+
+  get puedeEliminar(): boolean {
+    if (!this.usuarioActualId) return false;
+    return this.esAdmin || this.publicacion.autor._id === this.usuarioActualId;
   }
 
   onClickLike(): void {
