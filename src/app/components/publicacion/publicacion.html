@@ -12,7 +12,7 @@
     </div>
 
     @if (puedeEliminar) {
-      <button class="btn-eliminar" (click)="onClickEliminar()" title="Eliminar publicación">
+      <button class="btn-eliminar" (click)="onClickEliminar()" appTooltip="Eliminar publicación">
         <i class="bi bi-trash"></i>
       </button>
     }
@@ -38,13 +38,6 @@
     >
       <i class="bi" [class.bi-heart-fill]="publicacion.yaLeDiLike" [class.bi-heart]="!publicacion.yaLeDiLike"></i>
       {{ publicacion.cantidadLikes }}
-    </button>
-    <button
-      class="btn-eliminar"
-      (click)="onClickEliminar()"
-      appTooltip="Eliminar publicación"
-    >
-      <i class="bi bi-trash"></i>
     </button>
 
     <span class="publicacion-fecha">{{ publicacion.createdAt | tiempoRelativo }}</span>
